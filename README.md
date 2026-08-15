@@ -56,8 +56,8 @@ Then:
 
 ## Idea in one breath
 
-**Objective** = mini-vision (simple enough for a child; no numbers).  
-**Key Results** = how we know (metric from baseline → target).  
+**Mini-Vision** = where we’re going (simple enough for a child; no numbers).  
+**Key Results** = how we know (count from … to … in plain words).  
 **Specs** = build steps that *might* move the numbers — not the goals themselves.
 
 ## License

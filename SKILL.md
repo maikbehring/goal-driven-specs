@@ -2,10 +2,10 @@
 name: goal-driven-specs
 description: >-
   Bootstrap and run goal-driven, spec-driven product work for AI-built apps:
-  mini-vision Objectives, 3 measurable Key Results, numbered Specs, STATUS,
-  and HTML board/viewer. Use when starting docs/specs, choosing what to build
-  next, writing Specs from briefs, checking feasibility before code, updating
-  progress after ship, or teaching an agent to stay Goal-scoped.
+  child-simple mini-vision Objectives, 3 countable Key Results, numbered Specs,
+  STATUS, and HTML board/viewer. Use when starting docs/specs, choosing what to
+  build next, writing Specs from briefs, checking feasibility before code,
+  updating progress after ship, or teaching an agent to stay Goal-scoped.
 ---
 
 # Goal-driven Specs (for AI-built apps)
@@ -22,11 +22,12 @@ AI agents over-build, jump to Goal 2, and lose “what next?” without a short 
 |---------|-------------|
 | Agent invents scope | Specs + Acceptance Criteria |
 | Agent picks random P1 infra | Active Goal → unfinished KR → Spec order |
-| “Done” is fuzzy | Exactly 3 measurable Key Results |
+| “Done” is fuzzy | Exactly 3 countable Key Results |
 | Status lives only in chat | `STATUS.md` + `status.html` |
 | Brief → code immediately | Spec ≠ implement (unless user asks to build) |
+| Goals nobody remembers | Mini-vision + KRs a child could understand |
 
-**Install for a team:** clone into `.cursor/skills/goal-driven-specs/` so every clone gets the same workflow. Personal install: `~/.cursor/skills/goal-driven-specs/`. Source: https://github.com/maikbehring/goal-driven-specs
+**Install:** https://github.com/maikbehring/goal-driven-specs → `.cursor/skills/goal-driven-specs/` (repo) or `~/.cursor/skills/goal-driven-specs/` (personal).
 
 ## When to use
 
@@ -34,164 +35,168 @@ AI agents over-build, jump to Goal 2, and lose “what next?” without a short 
 - “What should we build next?”
 - Long product brief → Spec (and optional feasibility) before code
 - After a feature ships → tick AC / KR / STATUS / HTML
+- Rewrite Goals so Objectives are mini-visions and KRs are outcomes (not tasks)
 - Move Specs between Goals or free a Spec number
 
 ## Day-1 bootstrap (new or existing app)
 
-**Agent:** run the bootstrap script (or copy templates), then fill placeholders with the user — do not invent fake product Goals without asking.
+**Agent:** run the bootstrap script (or copy templates), then fill placeholders **with the user** — do not invent fake product Goals.
 
 ```bash
-# From the target project root
 SKILL="${GOAL_DRIVEN_SPECS_SKILL:-$HOME/.cursor/skills/goal-driven-specs}"
-# If the skill lives in the repo:
-# SKILL="$(pwd)/.cursor/skills/goal-driven-specs"
+# In-repo: SKILL="$(pwd)/.cursor/skills/goal-driven-specs"
 bash "$SKILL/scripts/bootstrap-specs.sh"
 ```
 
 Then with the user:
 
-1. **Product name** + language for docs (match the product; English templates are defaults).
-2. **Goal 1 Objective** + **exactly 3 Key Results** (shippable outcomes, not themes).
-3. **Goal 2** (optional but recommended): Objective + 3 KRs — document early, implement later.
-4. First Specs (`01-…`, `02-…`) mapped to KRs in `GOALS.md`.
-5. Paste [templates/AGENTS.md](templates/AGENTS.md) into `AGENTS.md` / `CLAUDE.md` (Goal order for agents).
+1. **Product name** + language for docs (match the product; English templates are defaults — rewrite Goals in the product language).
+2. **Goal 1 Mini-Vision** + **exactly 3 Key Results** (countable outcomes in plain words).
+3. **Goal 2** (recommended): Mini-Vision + 3 KRs — document early, implement later.
+4. First Specs mapped to KRs as **build steps** (not as the KR text).
+5. Paste [templates/AGENTS.md](templates/AGENTS.md) into `AGENTS.md` / `CLAUDE.md`.
 6. `npm run specs:html` → open `docs/specs/status.html`.
 
-Minimal viable set: `GOALS.md` + one Spec + `STATUS.md` + `status.html`. Add README/viewer as soon as there are ≥2 Specs.
+Minimal set: `GOALS.md` + one Spec + `STATUS.md` + `status.html`.
 
 ## Core model
 
 | Artifact | Path | Role |
 |----------|------|------|
-| Goals (OKR) | `docs/specs/GOALS.md` | Objective + **3 KRs** + Spec→KR order |
+| Goals | `docs/specs/GOALS.md` | Mini-Vision + **3 KRs** + Spec build steps |
 | Status | `docs/specs/STATUS.md` | Spec + KR progress; plain-language gaps |
 | Index | `docs/specs/README.md` | Next Spec + short KR line |
 | Specs | `docs/specs/NN-slug.md` | One shippable slice + AC |
-| Board | `docs/specs/status.html` | Human-readable Goals/KRs/Specs |
+| Board | `docs/specs/status.html` | Mini-visions, “how we know”, Spec filters |
 | Reader | `docs/specs/view.html` | Read Specs without raw markdown |
 | Embed | `docs/specs/specs-data.js` | Generated — never hand-edit |
 | Builder | `scripts/build-spec-viewer.mjs` | `npm run specs:html` |
 
-**Statuses (canonical):** `done` | `partial` | `open`  
-German projects may use `offen` as an alias for `open` (board filters accept both).  
-**partial** always states in simple language what works and what is missing.  
-**Goal done** = all 3 KRs checked (not “enough Specs are done”).
+**Statuses:** `done` \| `partial` \| `open` (`offen` alias OK).  
+**partial** always explains the gap in simple words.  
+**Goal done** = all 3 KRs measured and met — not “enough Specs are done”.
 
 ## Principles
 
 1. One Spec at a time (unless a hard dependency forces otherwise).
 2. Code only against **Acceptance Criteria**; grow scope → update Spec first.
 3. Sync **frontmatter + STATUS + README + status.html + GOALS (KRs)** together.
-4. Sequence: **active Goal → first unfinished KR → Spec order** (P1–P4 are secondary).
-5. After markdown changes under `docs/specs/`: `npm run specs:html`.
-6. **Spec ≠ implement.** “Write Spec / check feasibility” → docs + audit only. “Build / implement Spec” → code.
+4. Sequence: **active Goal → first unfinished KR → Spec order**.
+5. After `docs/specs/` markdown changes: `npm run specs:html`.
+6. **Spec ≠ implement.** Write Spec / feasibility only when asked; code only when asked to build.
 7. Spec numbers are permanent IDs — never overwrite `NN-*.md`.
-8. Exactly **3 Key Results** per Goal — no parallel “done when” checklist.
-9. Match the **project’s language** for Specs/Goals; keep this skill’s instructions in English so any team can follow them.
+8. Exactly **3 Key Results** per Goal — no parallel “done when” list.
+9. Match the **project’s language** for Specs/Goals; keep this skill’s instructions in English.
+10. **Simple enough for a child** — if a KR needs a glossary, rewrite it.
 
 ## Goal pattern (OKR)
 
 ```markdown
-## Goal N — Title (active | next)
+## Goal N — Short title (active | next)
 
-**Objective:** Qualitative — the world after success. **No numbers.**
+**Mini-Vision (Objective):**
+One short picture of the future. No numbers. No jargon.
 
-### Key Results
-1. [ ] **KR1 — Label:** [Metric] from [baseline] → [target] (how measured).
-2. [ ] **KR2 — Label:** …
-3. [ ] **KR3 — Label:** …
+### Key Results (how we know / count)
+1. [ ] **KR1 — Plain label:** … from A to B.
+2. [ ] **KR2 — Plain label:** …
+3. [ ] **KR3 — Plain label:** …
 
-### Initiatives (Specs)
-| # | Spec | Moves |
+### Build steps (Specs)
+| # | Spec | Helps |
 | 1 | [01-…](./01-….md) | KR1 |
 ```
 
-| | Objective | Key Result |
-|---|-----------|------------|
+| | Mini-Vision (Objective) | Key Result |
+|---|-------------------------|------------|
 | Answers | Where are we going? | How do we know we got there? |
-| Style | Inspiring, qualitative, **no metrics** | **Metric from baseline → target** |
-| Test | Describes a changed world | Still true if we swap the Spec/tactic |
-| Anti-pattern | “Ship Spec 09” / headcount in the title | “Launch APK” / “Implement auth” / “Spec done” |
+| Style | Picture a child gets; **no numbers** | Count: **from … to …** in plain words |
+| Label in docs | `Mini-Vision (Objective):` | `Key Results (how we know)` / `zählen` |
+| Anti-pattern | “Ship Spec 09” / headcount in the title | “Launch APK” / “Spec done” / OTP jargon without plain words |
 
-**Objective = mini-vision:** one short picture of the future a child could understand. No jargon, no numbers.  
-**Key Results = “how we know”:** still baseline → target, but in plain words (“from 0 to at least 1”, not dense metric slang).  
-Label the Objective as **Mini-Vision** in `GOALS.md` / HTML when it helps humans.
+**Wodtke test:** *How would we know?* What changes **out in the world** — not a finished task list.
 
-Specs / migrations / flags = **initiatives** that might move the number. If the number doesn’t move, change the initiative — don’t redefine the KR as the task.
+**Formula (keep the numbers; hide the jargon):**  
+`[Thing we can count] from [now] to [goal]`  
+Good: “Email code asks before first receipt: from 1+ to 0.”  
+Bad: “Enable Anonymous Auth provider.”
+
+Specs / flags / SQL = **build steps**. If the count doesn’t move, change the step — don’t turn the step into the KR.
 
 ### Writing good KRs
 
 | Do | Don't |
 |----|--------|
-| One metric, baseline → target | Task verbs: launch, ship, implement, finish Spec |
-| Outcome measurable if tactics change | “Spec 15 done” as the KR |
-| Stretch but possible (~0.7 often success) | Guaranteed checkbox after one PR |
-| Short measurement note (how you count) | Vague themes (“better UX”) |
+| Plain words + from → to | Task verbs: launch, ship, implement |
+| Still true if we swap the Spec | “Spec 15 done” as the KR |
+| Stretch but possible | Guaranteed checkbox after one PR |
 | Tick only after **measuring** | Tick because code merged |
+| HTML/STATUS: short “how we know” line | Dense metric slang on the board |
 
-**Goal 1 KR3** = behavior change (replaced old workflow / readiness score), not “we decided”.  
-**Goal 2** = reach · shared loop quality · proof of delight — counts live in KRs, not the Objective title.
+**Goal 1 KR3** = real use / “I’d bring someone” — not “we decided”.  
+**Goal 2** = reach · shared loop · “again please” — counts only in KRs.
 
-See [examples.md](examples.md). Document Goal 2 early; implement after Goal 1 KR3 moves unless overridden.
+See [examples.md](examples.md).
 
 ## Add or refine a Goal
 
-1. Title + **qualitative** Objective (no numbers).
-2. Exactly 3 KRs as `metric: baseline → target` (+ how measured).
-3. Spec table as **initiatives** tagged to KRs — never as the KR text.
-4. Mirror STATUS / README / `status.html` (`kr-done` only after measurement).
+1. Short title + **Mini-Vision** (child-simple, no numbers).
+2. Exactly 3 KRs: plain label + from → to.
+3. Spec table as **build steps** tagged to KRs.
+4. Mirror STATUS / README / `status.html` (label Mini-Vision; `kr-done` only after measurement).
 5. `npm run specs:html`.
 
-If existing KRs are task-shaped (“Spec done”, “APK shipped”), rewrite them to outcomes before adding more Specs.
+If KRs are task-shaped or Objectives are metric-heavy → rewrite before adding Specs.
 
 ## Add a Spec
 
-1. Next free `NN` (`ls docs/specs/[0-9]*.md`). If user demands a taken number → renumber occupant first ([reference.md](reference.md)).
+1. Next free `NN`. Taken number → renumber occupant first ([reference.md](reference.md)).
 2. Create from [templates/spec.md](templates/spec.md).
 3. Frontmatter: `id`, `title`, `priority`, `status`, `depends_on`.
-4. Required: Goal, current state, requirements/flow, AC checkboxes, out of scope, touched areas.
-5. Architecture / auth / data / AI providers: add **Feasibility** (+ optional phased delivery) before coding.
+4. Required: goal, current state, requirements/flow, AC, out of scope, touched areas.
+5. Architecture / auth / data / AI: **Feasibility** (+ optional phases) before code.
 6. Decisions: `Goal X #N · KRn` + overlap ownership.
-7. Wire README, STATUS, `status.html` specs array (`goal1`/`goal2`, plain-language gap), GOALS order.
+7. Wire README, STATUS, `status.html`, GOALS build-step table.
 8. `npm run specs:html`.
 
-**Long brief:** one Spec (or two shippable slices). Feasibility asked → audit + stop. Build asked → implement AC → sync (tick KR only if the outcome is truly met).
+**Long brief:** one Spec (or two shippable slices). Feasibility → audit + stop. Build → AC → sync (tick KR only if measured).
 
 ## Update progress (after implement)
 
 1. Spec `status` + AC `[x]`.
 2. STATUS + README next Spec.
 3. `status.html` Spec card + Goal step ✓.
-4. Tick KR in GOALS + STATUS + `kr-done` in HTML **only when measurable outcome + manual ops are done**.
+4. Tick KR only when the **count** was measured (and required ops are live).
 5. `npm run specs:html`.
 
 ## HTML board / reader
 
-**status.html must have:** product brand, active + next Goal cards with 3 KRs each, Spec order links, counts/progress, filters (All | Goal 1 | Goal 2 | Done | Partial | Open), plain-language gaps, `view.html?spec=` links.
+**status.html:** product brand; Goal cards with **Mini-Vision** + 3 plain “how we know” KRs (`kr-done` when met); Spec order; filters; `view.html?spec=` links.
 
-**view.html:** load `specs-data.js` (works with `file://`), render markdown, rewrite internal `.md` links to the viewer.
+**view.html:** `specs-data.js`, GFM, rewrite internal `.md` links.
 
 ## Agent behavior (non-negotiable)
 
-- “What next?” → unfinished KR under **active** Goal → next Spec in that KR.
-- Do not implement Goal 2 while Goal 1 KR3 is open unless the user explicitly overrides.
-- Creating/changing Goals → qualitative Objective + 3 KRs as **baseline → target**; rewrite task-KRs.
-- Tick KR only after the metric is measured (Spec done ≠ KR done).
-- Prefer project language for written Specs; remind about initiatives that unlock a metric (flags, SQL).
+- “What next?” → unfinished KR under **active** Goal → next Spec for that KR.
+- Do not implement Goal 2 while Goal 1 KR3 is open unless overridden.
+- Creating/changing Goals → Mini-Vision + 3 countable KRs in plain language; rewrite task-KRs.
+- Tick KR only after measuring (Spec done ≠ KR done).
+- Prefer project language for Specs/Goals; remind about build steps that unlock a count (flags, SQL).
+- Never leave `partial` without a simple-language gap.
+- Commits only when the user asks.
 
 ## Anti-patterns
 
-- Specs that are epics — split until one focused session can finish against AC.
-- Goals without KRs, or KRs that are tasks (“ship Spec”, “launch APK”).
-- Numbers in the Objective; missing baseline/target on KRs.
+- Epic Specs — split to one focused session against AC.
+- Task-KRs (“ship Spec”, “launch APK”) or numbers inside the Mini-Vision.
+- Jargon KRs a non-dev can’t score (“OTP dialogs”, “p95”) without a plain rewrite.
 - Implementing from chat without updating the Spec.
-- Marking KR done because code merged, without measuring the outcome.
-- P-priority table overriding Goal → KR → Spec order in `AGENTS.md`.
+- Marking KR done because code merged, without measuring.
+- P-priority overriding Goal → KR → Spec in `AGENTS.md`.
 
 ## Templates & scripts
 
 - [templates/](templates/) — README, STATUS, GOALS, spec, status.html, view.html, AGENTS.md
-- [scripts/bootstrap-specs.sh](scripts/bootstrap-specs.sh) — copy into a project
-- [scripts/build-spec-viewer.mjs](scripts/build-spec-viewer.mjs) — regenerate `specs-data.js`
-- [examples.md](examples.md) — sample Goal/KR sets
-- [reference.md](reference.md) — renumber, move Spec, sync checklist
+- [scripts/bootstrap-specs.sh](scripts/bootstrap-specs.sh)
+- [scripts/build-spec-viewer.mjs](scripts/build-spec-viewer.mjs)
+- [examples.md](examples.md) · [reference.md](reference.md)

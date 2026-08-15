@@ -35,11 +35,18 @@
 
 | Canonical | German alias (optional) |
 |-----------|-------------------------|
-| `done` | `done` |
+| `done` | `done` / `fertig` in prose |
 | `partial` | `partial` |
 | `open` | `offen` |
 
 Board JS should treat `open` and `offen` as the same filter bucket.
+
+## Plain language (required)
+
+- Label Objectives as **Mini-Vision** in GOALS / STATUS / HTML.
+- KRs answer “how we know?” with **from → to** a non-dev can score.
+- Spec tables are **build steps** / “helps KR…”, never the KR itself.
+- Prefer the product’s language for Goal docs; keep agent skill docs in English.
 
 ## Feasibility verdicts
 
