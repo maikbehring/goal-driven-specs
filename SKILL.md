@@ -89,7 +89,7 @@ Minimal set: `GOALS.md` + one Spec + `STATUS.md` + `status.html`.
 8. Exactly **3 Key Results** per Goal — no parallel “done when” list.
 9. Match the **project’s language** for Specs/Goals; keep this skill’s instructions in English.
 10. **Outsider test:** Someone who never heard of the product should understand Mini-Vision and every KR — and feel inspired. If they need a glossary (Expo Go, OTP, Spec IDs, “Bon”), rewrite.
-11. **No jargon in Goals.** Product/tech words belong in Specs and build-step tables, not in Mini-Vision or KR prose.
+12. **One KR = one result.** No joining two outcomes with “and” / “or” / “+”. If you need both, that is two KRs (or drop one). Thresholds like “score at least 4 of 5” are one result.
 
 ## Goal pattern (OKR)
 
@@ -130,9 +130,9 @@ Specs / flags / SQL = **build steps**. If the count doesn’t move, change the s
 
 | Do | Don't |
 |----|--------|
+| One **single** countable outcome | Two outcomes joined by and / or / “+” |
 | Lead with the human win, then the count | Lead with metric soup |
 | Words a non-user understands | Expo Go, OTP, p95, Spec 15 |
-| One idea per KR (split if “+” confuses) | Two unrelated checks jammed together |
 | Tick only after measuring | Tick because code merged |
 | Stretch but believable | Guaranteed checkbox after one PR |
 
@@ -190,8 +190,8 @@ If KRs are task-shaped, jargon-heavy, or Objectives are metric-heavy → rewrite
 
 ## Anti-patterns
 
+- Two outcomes in one KR joined by and/or/+ — split or drop one.
 - Jargon or cold metric-speak in Mini-Vision / KRs (Expo Go, OTP, Spec IDs) — rewrite for outsiders.
-- Two unrelated checks jammed with “+” so nobody understands the KR.
 - Epic Specs — split to one focused session against AC.
 - Task-KRs (“ship Spec”, “launch APK”) or numbers inside the Mini-Vision.
 - Implementing from chat without updating the Spec.

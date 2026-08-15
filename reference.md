@@ -44,8 +44,9 @@ Board JS should treat `open` and `offen` as the same filter bucket.
 ## Plain language (required)
 
 - Label Objectives as **Mini-Vision** — inspiring, no numbers, no tool jargon.
-- KRs under **How we know** / **Woran merken wir’s?** — human win first, count at the end.
+- KRs under **How we know** — **one result each** (no and/or between two wins); human win first, count at the end.
 - **Outsider test:** a stranger understands and feels inspired; if not, rewrite.
+- **One-result test:** “A and B” in a KR → two KRs or drop one.
 - Spec tables are **build steps for the team**, never the KR text.
 - Prefer the product’s language for Goal docs; keep this skill’s agent docs in English.
 

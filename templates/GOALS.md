@@ -3,11 +3,12 @@
 For people who don’t know the product yet:
 
 - **Mini-Vision** = an inspiring picture of the future (no jargon, no numbers)
-- **How we know** = clear wins you can count or answer yes/no
+- **How we know** = **exactly one** win per Key Result (no “and/or” joining two outcomes)
 - **Build steps** below = team work — *not* the goals themselves
 
 Exactly **three** Key Results per Goal.  
-**Outsider test:** a stranger should understand and feel inspired.
+**Outsider test:** a stranger should understand and feel inspired.  
+**One-result test:** if a KR needs “and” between two wins, split or drop one.
 
 ---
 
