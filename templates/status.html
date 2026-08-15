@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{PRODUCT}} – Spec Status</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F3F7F8;
+      --bg-alt: #E7F1F3;
+      --surface: #ffffff;
+      --text: #16343A;
+      --muted: #5B747A;
+      --faint: #8AA0A6;
+      --brand: #0F6E76;
+      --brand-soft: #D7EFF1;
+      --accent: #E07A5F;
+      --success: #2A9D8F;
+      --success-soft: #E2F5F2;
+      --warning: #E9A825;
+      --warning-soft: #FFF6DE;
+      --border: rgba(22, 52, 58, 0.08);
+      --radius: 18px;
+      --shadow: 0 10px 28px rgba(22, 52, 58, 0.07);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 500px at 10% -10%, var(--brand-soft), transparent 55%),
+        radial-gradient(900px 420px at 100% 0%, #fce8e2, transparent 50%),
+        var(--bg);
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 40px 20px 72px;
+    }
+
+    header {
+      margin-bottom: 28px;
+    }
+
+    .brand {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      font-size: clamp(2.4rem, 5vw, 3.4rem);
+      letter-spacing: -0.03em;
+      color: var(--brand);
+      margin: 0;
+      line-height: 1.05;
+    }
+
+    .lede {
+      margin: 10px 0 0;
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 36rem;
+      line-height: 1.45;
+    }
+
+    .meta {
+      margin-top: 14px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 28px 0 20px;
+    }
+
+    @media (max-width: 640px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat .n {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .stat .l {
+      margin-top: 6px;
+      font-size: 0.8rem;
+      color: var(--faint);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .progress {
+      height: 10px;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      overflow: hidden;
+      display: flex;
+      margin-bottom: 22px;
+    }
+
+    .progress span { display: block; height: 100%; }
+    .progress .done { background: var(--success); }
+    .progress .partial { background: var(--warning); }
+    .progress .offen,
+    .progress .open { background: rgba(138, 160, 166, 0.45); }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .filters button {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+    }
+
+    .filters button[aria-pressed="true"] {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #fff;
+    }
+
+    .list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    details.spec {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    details.spec[hidden] { display: none; }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px 16px;
+      align-items: center;
+      padding: 16px 18px;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    .id {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--brand);
+      min-width: 2.2rem;
+    }
+
+    .title {
+      font-weight: 700;
+      font-size: 1rem;
+    }
+
+    .kurz {
+      grid-column: 2 / -1;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.35;
+    }
+
+    .fehlt-line {
+      grid-column: 2 / -1;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.4;
+      padding: 8px 10px;
+      border-radius: 12px;
+      background: var(--warning-soft);
+      border: 1px solid rgba(233, 168, 37, 0.25);
+    }
+
+    .fehlt-line strong {
+      color: #9a6a00;
+      font-weight: 700;
+    }
+
+    details.spec[data-status="offen"] .fehlt-line,
+    details.spec[data-status="open"] .fehlt-line {
+      background: #eef2f3;
+      border-color: var(--border);
+    }
+
+    details.spec[data-status="offen"] .fehlt-line strong,
+    details.spec[data-status="open"] .fehlt-line strong {
+      color: var(--muted);
+    }
+
+    details.spec[data-status="done"] .fehlt-line {
+      display: none;
+    }
+
+    @media (min-width: 720px) {
+      summary {
+        grid-template-columns: auto 1fr auto;
+        grid-template-rows: auto auto;
+      }
+      .kurz {
+        grid-column: 2;
+      }
+      .fehlt-line {
+        grid-column: 2;
+      }
+      .badges {
+        grid-row: 1 / span 2;
+        align-self: start;
+      }
+    }
+
+    .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 5px 9px;
+      border-radius: 999px;
+    }
+
+    .badge.prio { background: var(--bg-alt); color: var(--muted); }
+    .badge.done { background: var(--success-soft); color: var(--success); }
+    .badge.partial { background: var(--warning-soft); color: #9a6a00; }
+    .badge.offen,
+    .badge.open { background: #eef2f3; color: var(--faint); }
+
+    .body {
+      border-top: 1px solid var(--border);
+      padding: 14px 18px 18px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    @media (max-width: 560px) {
+      .body { grid-template-columns: 1fr; }
+    }
+
+    .body h3 {
+      margin: 0 0 6px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--faint);
+    }
+
+    .body ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.45;
+    }
+
+    .body a {
+      color: var(--brand);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .body a:hover { text-decoration: underline; }
+
+    .core {
+      margin-top: 28px;
+      padding: 20px 22px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--brand) 0%, #0a555c 100%);
+      color: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .core h2 {
+      font-family: Fraunces, Georgia, serif;
+      margin: 0 0 8px;
+      font-size: 1.35rem;
+    }
+
+    .core p {
+      margin: 0;
+      opacity: 0.9;
+      line-height: 1.45;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: 0.85rem;
+      color: var(--faint);
+    }
+
+    footer a { color: var(--brand); }
+
+    .goal {
+      margin: 0 0 28px;
+      padding: 22px 22px 20px;
+      border-radius: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .goal::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: var(--accent);
+    }
+
+    .goal-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 0 0 6px;
+    }
+
+    .goal h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(1.45rem, 3vw, 1.85rem);
+      margin: 0 0 8px;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .goal > p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      max-width: 40rem;
+    }
+
+    .goal-krs {
+      list-style: none;
+      margin: 0 0 16px;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .goal-krs li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.55);
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+      line-height: 1.35;
+      color: var(--text);
+    }
+
+    .goal-krs .kr {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      padding-top: 1px;
+    }
+
+    .goal-krs .kr-done {
+      color: var(--success);
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+      opacity: 0.85;
+    }
+
+    .goal-krs-label {
+      margin: 0 0 8px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .goal-steps {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px;
+    }
+
+    .goal-steps li {
+      display: grid;
+      grid-template-columns: 2rem 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      font-size: 0.92rem;
+    }
+
+    .goal-steps .n {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      color: var(--brand);
+      font-size: 1.1rem;
+    }
+
+    .goal-steps a {
+      color: var(--brand);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .goal-steps a:hover { text-decoration: underline; }
+
+    .goal-steps .why {
+      color: var(--faint);
+      font-size: 0.82rem;
+      text-align: right;
+    }
+
+    @media (max-width: 560px) {
+      .goal-steps li {
+        grid-template-columns: 2rem 1fr;
+      }
+      .goal-steps .why {
+        grid-column: 2;
+        text-align: left;
+      }
+    }
+
+    .goal-foot {
+      margin-top: 14px;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+
+    .goal-foot a { color: var(--brand); font-weight: 500; }
+
+    details.spec.goal1 {
+      outline: 2px solid rgba(224, 122, 95, 0.35);
+      outline-offset: 0;
+    }
+
+    .badge.goal1 {
+      background: #FCE8E2;
+      color: #b5523a;
+    }
+
+    details.spec.goal2 {
+      outline: 2px solid rgba(15, 110, 118, 0.3);
+      outline-offset: 0;
+    }
+
+    .badge.goal2 {
+      background: #D7EFF1;
+      color: #0F6E76;
+    }
+
+    section.goal.next {
+      margin-top: 16px;
+      background: linear-gradient(165deg, #E7F1F3 0%, #F3F7F8 55%, #fff 100%);
+      border: 1px dashed rgba(15, 110, 118, 0.25);
+    }
+
+    section.goal.next .goal-eyebrow { color: var(--brand); }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1 class="brand">{{PRODUCT}}</h1>
+      <p class="lede">Spec status — what already works, and what’s still missing in plain language.</p>
+      <div class="meta">
+        <span class="pill">As of: {{DATE}}</span>
+        <span class="pill">Goal 1 active · Goal 2 planned</span>
+        <span class="pill">Source: <code>docs/specs/</code></span>
+      </div>
+    </header>
+
+    <section class="goal" aria-labelledby="goal1-title">
+      <p class="goal-eyebrow">Goal 1 · active</p>
+      <h2 id="goal1-title">{{GOAL1_TITLE}}</h2>
+      <p>
+        {{GOAL1_SUMMARY}}
+      </p>
+      <p class="goal-krs-label">Key Results</p>
+      <ol class="goal-krs">
+        <!-- Use class="kr-done" on the text span when that KR is met -->
+        <li><span class="kr">KR1</span><span>{{GOAL1_KR1}}</span></li>
+        <li><span class="kr">KR2</span><span>{{GOAL1_KR2}}</span></li>
+        <li><span class="kr">KR3</span><span>{{GOAL1_KR3}}</span></li>
+      </ol>
+      <ol class="goal-steps">
+        <!-- Replace with Goal 1 Specs: link to view.html?spec=NN-….md -->
+        <li>
+          <span class="n">1</span>
+          <a href="./view.html?spec=01-example.md">01 Example</a>
+          <span class="why">Why</span>
+        </li>
+      </ol>
+      <p class="goal-foot">
+        Details:
+        <a href="./view.html?spec=GOALS.md">GOALS.md</a>
+      </p>
+    </section>
+
+    <section class="goal next" aria-labelledby="goal2-title">
+      <p class="goal-eyebrow">Goal 2 · next</p>
+      <h2 id="goal2-title">{{GOAL2_TITLE}}</h2>
+      <p>
+        {{GOAL2_SUMMARY}}
+      </p>
+      <p class="goal-krs-label">Key Results</p>
+      <ol class="goal-krs">
+        <li><span class="kr">KR1</span><span>{{GOAL2_KR1}}</span></li>
+        <li><span class="kr">KR2</span><span>{{GOAL2_KR2}}</span></li>
+        <li><span class="kr">KR3</span><span>{{GOAL2_KR3}}</span></li>
+      </ol>
+      <ol class="goal-steps">
+        <li>
+          <span class="n">1</span>
+          <a href="./view.html?spec=02-example.md">02 Example</a>
+          <span class="why">Why</span>
+        </li>
+      </ol>
+      <p class="goal-foot">
+        Starts after Goal 1. Details:
+        <a href="./view.html?spec=GOALS.md">GOALS.md</a>
+      </p>
+    </section>
+
+    <div class="stats" id="stats"></div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+
+    <div class="filters" role="group" aria-label="Filter by status">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="goal1" aria-pressed="false">Goal 1</button>
+      <button type="button" data-filter="goal2" aria-pressed="false">Goal 2</button>
+      <button type="button" data-filter="done" aria-pressed="false">Done</button>
+      <button type="button" data-filter="partial" aria-pressed="false">Partial</button>
+      <button type="button" data-filter="open" aria-pressed="false">Open</button>
+    </div>
+
+    <div class="list" id="list"></div>
+
+    <section class="core">
+      <h2>Product core</h2>
+      <p>{{PRODUCT_CORE}}</p>
+    </section>
+
+    <footer>
+      Spec files:
+      <a href="./view.html?spec=GOALS.md">Goals</a> ·
+      <a href="./view.html?spec=README.md">README</a> ·
+      <a href="./view.html?spec=STATUS.md">STATUS</a> ·
+      <a href="./status.html">Status board</a>
+      · Refresh: <code>npm run specs:html</code>
+    </footer>
+  </div>
+
+  <script>
+    const specs = [
+      {
+        id: "01",
+        title: "Example Spec",
+        file: "01-example.md",
+        prio: "P1",
+        status: "open",
+        goal1: 1,
+        kurz: "Not built yet.",
+        fehltEinfach: "One sentence: what the user still cannot do.",
+        da: ["—"],
+        fehlt: ["First acceptance criterion", "Second acceptance criterion"],
+      },
+      // Add more Specs. Set goal1: N and/or goal2: N for Goal order badges.
+    ];
+
+    const normStatus = (s) => (s === "offen" ? "open" : s);
+
+    const counts = specs.reduce(
+      (acc, s) => {
+        const st = normStatus(s.status);
+        acc[st] = (acc[st] || 0) + 1;
+        acc.total += 1;
+        return acc;
+      },
+      { done: 0, partial: 0, open: 0, total: 0 }
+    );
+
+    const statsEl = document.getElementById("stats");
+    statsEl.innerHTML = [
+      ["total", counts.total, "Specs"],
+      ["done", counts.done, "Done"],
+      ["partial", counts.partial, "Partial"],
+      ["open", counts.open, "Open"],
+    ]
+      .map(
+        ([, n, l]) =>
+          `<div class="stat"><div class="n">${n}</div><div class="l">${l}</div></div>`
+      )
+      .join("");
+
+    const progress = document.getElementById("progress");
+    const pct = (n) => (counts.total ? (n / counts.total) * 100 : 0);
+    progress.innerHTML = `
+      <span class="done" style="width:${pct(counts.done)}%"></span>
+      <span class="partial" style="width:${pct(counts.partial)}%"></span>
+      <span class="open" style="width:${pct(counts.open)}%"></span>
+    `;
+
+    const list = document.getElementById("list");
+    list.innerHTML = specs
+      .map((s) => {
+        const bullets = (arr) => arr.map((x) => `<li>${x}</li>`).join("");
+        const goalClass = s.goal1 ? " goal1" : s.goal2 ? " goal2" : "";
+        const goalBadge = s.goal1
+          ? `<span class="badge goal1">Goal 1 · #${s.goal1}</span>`
+          : s.goal2
+            ? `<span class="badge goal2">Goal 2 · #${s.goal2}</span>`
+            : "";
+        const st = normStatus(s.status);
+        return `
+          <details class="spec${goalClass}" data-status="${st}" data-goal1="${s.goal1 ? "1" : "0"}" data-goal2="${s.goal2 ? "1" : "0"}">
+            <summary>
+              <span class="id">${s.id}</span>
+              <span class="title">${s.title}</span>
+              <span class="kurz">${s.kurz}</span>
+              <span class="fehlt-line"><strong>Missing:</strong> ${s.fehltEinfach}</span>
+              <span class="badges">
+                ${goalBadge}
+                <span class="badge prio">${s.prio}</span>
+                <span class="badge ${st}">${st}</span>
+              </span>
+            </summary>
+            <div class="body">
+              <div>
+                <h3>Already there</h3>
+                <ul>${bullets(s.da)}</ul>
+              </div>
+              <div>
+                <h3>Still missing</h3>
+                <ul>${bullets(s.fehlt)}</ul>
+                <p style="margin:10px 0 0"><a href="./view.html?spec=${encodeURIComponent(s.file)}">Read Spec →</a></p>
+              </div>
+            </div>
+          </details>
+        `;
+      })
+      .join("");
+
+    document.querySelectorAll(".filters button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const filter = btn.dataset.filter;
+        document
+          .querySelectorAll(".filters button")
+          .forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+        document.querySelectorAll(".spec").forEach((el) => {
+          let show = true;
+          if (filter === "goal1") show = el.dataset.goal1 === "1";
+          else if (filter === "goal2") show = el.dataset.goal2 === "1";
+          else if (filter !== "all") show = el.dataset.status === filter;
+          el.hidden = !show;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

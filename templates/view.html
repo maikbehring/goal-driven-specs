@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{PRODUCT}} – Spec</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/marked@15.0.7/marked.min.js"></script>
+  <script src="./specs-data.js"></script>
+  <style>
+    :root {
+      --bg: #F3F7F8;
+      --bg-alt: #E7F1F3;
+      --surface: #ffffff;
+      --text: #16343A;
+      --muted: #5B747A;
+      --faint: #8AA0A6;
+      --brand: #0F6E76;
+      --brand-soft: #D7EFF1;
+      --accent: #E07A5F;
+      --success: #2A9D8F;
+      --border: rgba(22, 52, 58, 0.08);
+      --code-bg: #eef5f6;
+      --radius: 18px;
+      --shadow: 0 10px 28px rgba(22, 52, 58, 0.07);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "DM Sans", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1000px 420px at 0% -5%, var(--brand-soft), transparent 55%),
+        var(--bg);
+      line-height: 1.55;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(10px);
+      background: rgba(243, 247, 248, 0.88);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 12px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-link {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--brand);
+      text-decoration: none;
+    }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .nav a, .nav select {
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+    }
+
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .nav a:hover { color: var(--brand); border-color: var(--brand-soft); }
+
+    .nav select {
+      appearance: none;
+      padding: 6px 28px 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='%235B747A' d='M0 0l6 8 6-8z'/%3E%3C/svg%3E") no-repeat right 10px center;
+      color: var(--text);
+      cursor: pointer;
+      max-width: min(280px, 70vw);
+    }
+
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 28px 20px 80px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      padding: 5px 9px;
+      border-radius: 999px;
+      background: var(--bg-alt);
+      color: var(--muted);
+    }
+
+    .badge.status-done { background: #E2F5F2; color: var(--success); }
+    .badge.status-partial { background: #FFF6DE; color: #9a6a00; }
+    .badge.status-offen { background: #eef2f3; color: var(--faint); }
+
+    article.doc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      padding: clamp(22px, 4vw, 40px);
+    }
+
+    .doc > *:first-child { margin-top: 0; }
+
+    .doc h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: clamp(1.8rem, 4vw, 2.35rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--brand);
+      margin: 0 0 0.6em;
+    }
+
+    .doc h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.45rem;
+      margin: 1.6em 0 0.55em;
+      color: var(--text);
+      padding-top: 0.4em;
+      border-top: 1px solid var(--border);
+    }
+
+    .doc h2:first-of-type { border-top: 0; padding-top: 0; }
+
+    .doc h3 {
+      font-size: 1.05rem;
+      margin: 1.35em 0 0.4em;
+      color: var(--text);
+    }
+
+    .doc p, .doc li {
+      font-size: 1.02rem;
+      color: var(--text);
+    }
+
+    .doc p { margin: 0 0 1em; }
+    .doc ul, .doc ol { margin: 0 0 1.1em; padding-left: 1.25em; }
+    .doc li { margin: 0.35em 0; }
+    .doc li::marker { color: var(--brand); }
+
+    .doc a { color: var(--brand); font-weight: 500; }
+    .doc strong { font-weight: 700; }
+
+    .doc blockquote {
+      margin: 1em 0;
+      padding: 12px 16px;
+      border-left: 4px solid var(--brand);
+      background: var(--brand-soft);
+      border-radius: 0 12px 12px 0;
+      color: var(--text);
+    }
+
+    .doc blockquote p { margin: 0; }
+
+    .doc code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.88em;
+      background: var(--code-bg);
+      padding: 0.12em 0.4em;
+      border-radius: 6px;
+    }
+
+    .doc pre {
+      background: #0B2E33;
+      color: #e7f1f3;
+      padding: 16px 18px;
+      border-radius: 14px;
+      overflow-x: auto;
+      margin: 0 0 1.2em;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .doc pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      font-size: inherit;
+    }
+
+    .doc table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 1.3em;
+      font-size: 0.95rem;
+      display: block;
+      overflow-x: auto;
+    }
+
+    .doc th, .doc td {
+      text-align: left;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+
+    .doc th {
+      background: var(--bg-alt);
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .doc tr:hover td { background: rgba(215, 239, 241, 0.35); }
+
+    .doc hr {
+      border: 0;
+      border-top: 1px solid var(--border);
+      margin: 1.8em 0;
+    }
+
+    .doc input[type="checkbox"] {
+      margin-right: 0.4em;
+      accent-color: var(--brand);
+    }
+
+    .error {
+      padding: 24px;
+      background: #FCE8E2;
+      border-radius: var(--radius);
+      color: #8a3a2a;
+    }
+
+    .frontmatter {
+      margin-bottom: 1.2em;
+      padding: 12px 14px;
+      background: var(--bg-alt);
+      border-radius: 12px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .frontmatter code {
+      background: var(--surface);
+    }
+
+    footer.page-foot {
+      margin-top: 22px;
+      font-size: 0.85rem;
+      color: var(--faint);
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <a class="brand-link" href="./status.html">{{PRODUCT}} Specs</a>
+      <div class="nav">
+        <a href="./status.html">← Status</a>
+        <a href="./view.html?spec=GOALS.md">Goal 1</a>
+        <select id="picker" aria-label="Spec wählen"></select>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="meta" id="meta"></div>
+    <article class="doc" id="doc"></article>
+    <footer class="page-foot">
+      Quelle: Markdown in <code>docs/specs/</code> · Ansicht neu erzeugen mit
+      <code>node scripts/build-spec-viewer.mjs</code>
+    </footer>
+  </div>
+
+  <script>
+    function parseFrontmatter(raw) {
+      if (!raw.startsWith("---")) return { meta: {}, body: raw };
+      const end = raw.indexOf("\n---", 3);
+      if (end === -1) return { meta: {}, body: raw };
+      const fm = raw.slice(3, end).trim();
+      const body = raw.slice(end + 4).replace(/^\n/, "");
+      const meta = {};
+      fm.split("\n").forEach((line) => {
+        const m = line.match(/^(\w+):\s*(.*)$/);
+        if (!m) return;
+        let v = m[2].trim();
+        if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+          v = v.slice(1, -1);
+        }
+        if (v.startsWith("[") && v.endsWith("]")) {
+          v = v
+            .slice(1, -1)
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+        }
+        meta[m[1]] = v;
+      });
+      return { meta, body };
+    }
+
+    function querySpec() {
+      const p = new URLSearchParams(location.search);
+      return p.get("spec") || p.get("s") || "README.md";
+    }
+
+    function setQuery(file) {
+      const url = new URL(location.href);
+      url.searchParams.set("spec", file);
+      history.replaceState(null, "", url);
+    }
+
+    function render(file) {
+      const data = window.SPEC_DOCS || {};
+      const raw = data[file];
+      const doc = document.getElementById("doc");
+      const metaEl = document.getElementById("meta");
+      document.title = `{{PRODUCT}} – ${file}`;
+
+      if (!raw) {
+        metaEl.innerHTML = "";
+        doc.innerHTML = `<div class="error">Spec „${file}“ nicht gefunden. Bitte <code>node scripts/build-spec-viewer.mjs</code> ausführen.</div>`;
+        return;
+      }
+
+      const { meta, body } = parseFrontmatter(raw);
+      const badges = [];
+      if (meta.priority) badges.push(`<span class="badge">${meta.priority}</span>`);
+      if (meta.status) {
+        const st = String(meta.status).toLowerCase();
+        badges.push(`<span class="badge status-${st}">${meta.status}</span>`);
+      }
+      if (meta.id) badges.push(`<span class="badge">${meta.id}</span>`);
+      metaEl.innerHTML = badges.join("");
+
+      marked.setOptions({ gfm: true, breaks: false });
+      doc.innerHTML = marked.parse(body);
+
+      // Open internal .md links in this viewer
+      doc.querySelectorAll('a[href$=".md"]').forEach((a) => {
+        const href = a.getAttribute("href") || "";
+        if (href.startsWith("http")) return;
+        const name = href.replace(/^\.\//, "");
+        a.setAttribute("href", `./view.html?spec=${encodeURIComponent(name)}`);
+      });
+    }
+
+    function initPicker(current) {
+      const picker = document.getElementById("picker");
+      const files = Object.keys(window.SPEC_DOCS || {}).sort((a, b) => {
+        const na = a.match(/^\d+/)?.[0];
+        const nb = b.match(/^\d+/)?.[0];
+        if (na && nb) return Number(na) - Number(nb);
+        if (na) return -1;
+        if (nb) return 1;
+        return a.localeCompare(b);
+      });
+      picker.innerHTML = files
+        .map((f) => `<option value="${f}" ${f === current ? "selected" : ""}>${f}</option>`)
+        .join("");
+      picker.addEventListener("change", () => {
+        setQuery(picker.value);
+        render(picker.value);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+
+    const file = querySpec();
+    initPicker(file);
+    render(file);
+  </script>
+</body>
+</html>
