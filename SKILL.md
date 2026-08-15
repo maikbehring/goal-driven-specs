@@ -93,61 +93,62 @@ Minimal set: `GOALS.md` + one Spec + `STATUS.md` + `status.html`.
 ## Goal pattern (OKR)
 
 ```markdown
-## Goal N — Short title (active | next)
+## Goal N — Warm short title (active | next)
 
-**Mini-Vision (Objective):**
-One short picture of the future. No numbers. No jargon.
+**Mini-Vision:**
+One inspiring picture of the future. No numbers. No product jargon.
+A stranger should get it in one breath.
 
-### Key Results (how we know / count)
-1. [ ] **KR1 — Plain label:** … from A to B.
-2. [ ] **KR2 — Plain label:** …
-3. [ ] **KR3 — Plain label:** …
+### How we know / Woran merken wir’s?
+1. [ ] **Short emotional label.**
+   One or two plain sentences. End with something you can count or clearly yes/no.
+2. [ ] …
+3. [ ] …
 
-### Build steps (Specs)
+### Build steps (for the team only)
 | # | Spec | Helps |
-| 1 | [01-…](./01-….md) | KR1 |
 ```
 
-| | Mini-Vision (Objective) | Key Result |
-|---|-------------------------|------------|
-| Answers | Where are we going? | How do we know we got there? |
-| Style | Picture a child gets; **no numbers** | Count: **from … to …** in plain words |
-| Label in docs | `Mini-Vision (Objective):` | `Key Results (how we know)` / `zählen` |
-| Anti-pattern | “Ship Spec 09” / headcount in the title | “Launch APK” / “Spec done” / OTP jargon without plain words |
+| | Mini-Vision | Key Result |
+|---|-------------|------------|
+| Audience | Anyone (not only the team) | Anyone can score it |
+| Style | Inspiring future picture; **no numbers** | Human win first, clear count / yes-no at the end |
+| Feel | “I want that” | “I know if we got there” |
+| Anti-pattern | Feature list, headcount, tool names | Tasks, Spec IDs, Expo/OTP/API slang |
 
-**Wodtke test:** *How would we know?* What changes **out in the world** — not a finished task list.
+**Outsider test (required):** Read Mini-Vision + 3 KRs aloud to someone outside the project. If they ask “what is X?”, rewrite X away.
 
-**Formula (keep the numbers; hide the jargon):**  
-`[Thing we can count] from [now] to [goal]`  
-Good: “Email code asks before first receipt: from 1+ to 0.”  
-Bad: “Enable Anonymous Auth provider.”
+**Wodtke test:** *How would we know?* Change **in the world** — not a finished task list.
+
+Good: “You save the first expense without signing up or typing an email code.”  
+Bad: “OTP prompts before first Bon: ≥1 → 0” (true, but cold and insider-only).
 
 Specs / flags / SQL = **build steps**. If the count doesn’t move, change the step — don’t turn the step into the KR.
 
-### Writing good KRs
+### Writing inspiring, clear KRs
 
 | Do | Don't |
 |----|--------|
-| Plain words + from → to | Task verbs: launch, ship, implement |
-| Still true if we swap the Spec | “Spec 15 done” as the KR |
-| Stretch but possible | Guaranteed checkbox after one PR |
-| Tick only after **measuring** | Tick because code merged |
-| HTML/STATUS: short “how we know” line | Dense metric slang on the board |
+| Lead with the human win, then the count | Lead with metric soup |
+| Words a non-user understands | Expo Go, OTP, p95, Spec 15 |
+| One idea per KR (split if “+” confuses) | Two unrelated checks jammed together |
+| Tick only after measuring | Tick because code merged |
+| Stretch but believable | Guaranteed checkbox after one PR |
 
 **Goal 1 KR3** = real use / “I’d bring someone” — not “we decided”.  
-**Goal 2** = reach · shared loop · “again please” — counts only in KRs.
+**Goal 2** = arrive · share clearly · “again please”.
 
 See [examples.md](examples.md).
 
 ## Add or refine a Goal
 
-1. Short title + **Mini-Vision** (child-simple, no numbers).
-2. Exactly 3 KRs: plain label + from → to.
-3. Spec table as **build steps** tagged to KRs.
-4. Mirror STATUS / README / `status.html` (label Mini-Vision; `kr-done` only after measurement).
+1. Warm title + **Mini-Vision** (outsider-inspiring, no numbers, no jargon).
+2. Exactly 3 KRs: human win in 1–2 sentences + countable end.
+3. Spec table as **build steps for the team** only.
+4. Mirror STATUS / README / `status.html` (`kr-done` only after measurement).
 5. `npm run specs:html`.
 
-If KRs are task-shaped or Objectives are metric-heavy → rewrite before adding Specs.
+If KRs are task-shaped, jargon-heavy, or Objectives are metric-heavy → rewrite before adding Specs.
 
 ## Add a Spec
 
