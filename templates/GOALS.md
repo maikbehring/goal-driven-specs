@@ -1,35 +1,36 @@
 # Goals – {{PRODUCT}}
 
-Keep it simple:
+For people who don’t know the product yet:
 
-- **Mini-Vision (Objective)** = where we want to go (no number soup)
-- **Key Results** = how we know it worked (count: from … to …)
-- **Specs** = build steps that help the numbers — not the goals themselves
+- **Mini-Vision** = an inspiring picture of the future (no jargon, no numbers)
+- **How we know** = clear wins you can count or answer yes/no
+- **Build steps** below = team work — *not* the goals themselves
 
-Exactly **3** Key Results per Goal.
+Exactly **three** Key Results per Goal.  
+**Outsider test:** a stranger should understand and feel inspired.
 
 ---
 
 ## Goal 1 — {{GOAL1_TITLE}} (active)
 
-**Mini-Vision (Objective):**  
+**Mini-Vision:**  
 {{GOAL1_SUMMARY}}
 
-Write a future picture a child could understand — no numbers, no jargon.
+### How we know
 
-### Key Results (how we know)
+1. [ ] **{{GOAL1_KR1}}**
+2. [ ] **{{GOAL1_KR2}}**
+3. [ ] **{{GOAL1_KR3}}**
 
-1. [ ] **KR1 — Short label:** {{GOAL1_KR1}}
-2. [ ] **KR2 — Short label:** {{GOAL1_KR2}}
-3. [ ] **KR3 — Short label:** {{GOAL1_KR3}}
+Write each KR as a short human win (1–2 sentences), ending with something countable.
 
 ### Reminders
 
-1. Counts matter — not only Spec checkboxes.
+1. Experience first — then accounts / signup, if needed.
 2. One Spec at a time under this Goal.
-3. Do not start Goal 2 build work until Goal 1 KR3 moves — unless overridden.
+3. Don’t start Goal 2 build work until Goal 1 KR3 moves — unless overridden.
 
-### Build steps (Specs)
+### Build steps (for the team)
 
 | # | Spec | Helps |
 |---|------|-------|
@@ -39,18 +40,16 @@ Write a future picture a child could understand — no numbers, no jargon.
 
 ## Goal 2 — {{GOAL2_TITLE}} (next)
 
-**Mini-Vision (Objective):**  
+**Mini-Vision:**  
 {{GOAL2_SUMMARY}}
 
-Same rule: simple picture of the future; put counts only in Key Results.
+### How we know
 
-### Key Results (how we know)
+1. [ ] **{{GOAL2_KR1}}**
+2. [ ] **{{GOAL2_KR2}}**
+3. [ ] **{{GOAL2_KR3}}**
 
-1. [ ] **KR1 — Reach:** {{GOAL2_KR1}}
-2. [ ] **KR2 — Together:** {{GOAL2_KR2}}
-3. [ ] **KR3 — Again:** {{GOAL2_KR3}}
-
-### Build steps (Specs)
+### Build steps (for the team)
 
 | # | Spec | Helps |
 |---|------|-------|

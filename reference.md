@@ -43,10 +43,11 @@ Board JS should treat `open` and `offen` as the same filter bucket.
 
 ## Plain language (required)
 
-- Label Objectives as **Mini-Vision** in GOALS / STATUS / HTML.
-- KRs answer “how we know?” with **from → to** a non-dev can score.
-- Spec tables are **build steps** / “helps KR…”, never the KR itself.
-- Prefer the product’s language for Goal docs; keep agent skill docs in English.
+- Label Objectives as **Mini-Vision** — inspiring, no numbers, no tool jargon.
+- KRs under **How we know** / **Woran merken wir’s?** — human win first, count at the end.
+- **Outsider test:** a stranger understands and feels inspired; if not, rewrite.
+- Spec tables are **build steps for the team**, never the KR text.
+- Prefer the product’s language for Goal docs; keep this skill’s agent docs in English.
 
 ## Feasibility verdicts
 

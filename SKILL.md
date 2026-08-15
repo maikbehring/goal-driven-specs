@@ -87,7 +87,8 @@ Minimal set: `GOALS.md` + one Spec + `STATUS.md` + `status.html`.
 7. Spec numbers are permanent IDs — never overwrite `NN-*.md`.
 8. Exactly **3 Key Results** per Goal — no parallel “done when” list.
 9. Match the **project’s language** for Specs/Goals; keep this skill’s instructions in English.
-10. **Simple enough for a child** — if a KR needs a glossary, rewrite it.
+10. **Outsider test:** Someone who never heard of the product should understand Mini-Vision and every KR — and feel inspired. If they need a glossary (Expo Go, OTP, Spec IDs, “Bon”), rewrite.
+11. **No jargon in Goals.** Product/tech words belong in Specs and build-step tables, not in Mini-Vision or KR prose.
 
 ## Goal pattern (OKR)
 
@@ -187,9 +188,10 @@ If KRs are task-shaped or Objectives are metric-heavy → rewrite before adding 
 
 ## Anti-patterns
 
+- Jargon or cold metric-speak in Mini-Vision / KRs (Expo Go, OTP, Spec IDs) — rewrite for outsiders.
+- Two unrelated checks jammed with “+” so nobody understands the KR.
 - Epic Specs — split to one focused session against AC.
 - Task-KRs (“ship Spec”, “launch APK”) or numbers inside the Mini-Vision.
-- Jargon KRs a non-dev can’t score (“OTP dialogs”, “p95”) without a plain rewrite.
 - Implementing from chat without updating the Spec.
 - Marking KR done because code merged, without measuring.
 - P-priority overriding Goal → KR → Spec in `AGENTS.md`.

@@ -56,9 +56,10 @@ Then:
 
 ## Idea in one breath
 
-**Mini-Vision** = where we’re going (simple enough for a child; no numbers).  
-**Key Results** = how we know (count from … to … in plain words).  
-**Specs** = build steps that *might* move the numbers — not the goals themselves.
+**Mini-Vision** = inspiring future a stranger wants (no numbers, no jargon).  
+**How we know** = human wins you can count or clearly yes/no.  
+**Specs** = build steps for the team — not the goals themselves.  
+**Outsider test:** if someone outside the project doesn’t get it, rewrite.
 
 ## License
 

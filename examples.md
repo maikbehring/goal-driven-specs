@@ -1,61 +1,60 @@
-# Examples — Mini-visions + countable KRs
+# Examples — inspiring Mini-visions + clear KRs
 
-Copy the **shape**. Mini-Vision = no numbers. KRs = plain “from … to …”. Specs are build steps.
+Copy the **feel**. A stranger should understand and want it. No tool jargon in the Goals.
 
-## Consumer mobile (solo → share)
+## Consumer trip wallet
 
-**Goal 1 — Solo first (active)**  
-**Mini-Vision:** On trips, your spending lives only in the app — as easy as sending a photo.  
-**KRs:**
-1. Solo trips start→finish where the split feels right: **0 → at least 1**
-2. Asks for an email code before the first receipt (fresh start): **1+ → 0**
-3. On a trip with ≥8 receipts: all *your* receipts in the app (not chat) + score “partner can try” **≥8/10**
+**Goal 1 — Strong alone (active)**  
+**Mini-Vision:** On trips you always know who paid what — easy as a photo, no notes, no chat chaos.  
+**How we know:**
+1. **The split feels fair.** You finished at least one trip alone from start to clear “who owes whom.”
+2. **Value before signup.** Fresh start: you save the first expense without email, code, or “please register first.”
+3. **You’d bring the person next to you.** On a real(ish) trip you put at least eight of your expenses here — none only in chat — then score yourself ≥8/10 on “Would I invite my partner now?”
 
-**Goal 2 — Friends on Android (next)**  
-**Mini-Vision:** Friends on Android share one trip wallet — and want to do it again.  
-**KRs:**
-1. People who open the app without Expo Go: **0 → 5**
-2. Shared trips where 2 people each add ≥1 receipt and see the other within 5 minutes: **0 → at least 1**
-3. Of 5 people asked, score ≥4/5 on “next trip again”: **0 → at least 4**
+**Goal 2 — Together on the road (next)**  
+**Mini-Vision:** Friends share one trip wallet on their phones — and already look forward to the next trip with it.  
+**How we know:**
+1. **Five people arrive.** Five Android users install like a normal app (not a special developer tool) and open it once.
+2. **Two see the same money.** At least one shared trip: each person adds an expense; the other sees it within five minutes.
+3. **“Next time again.”** Of five people asked, at least four score 4 or 5 out of 5: they’d use it on the next trip.
 
-## B2B SaaS (dogfood → partners)
+## B2B SaaS
 
 **Goal 1 — Drop the spreadsheet (active)**  
-**Mini-Vision:** Your team runs the weekly job here instead of the spreadsheet.  
-**KRs:**
-1. Teammates using the core flow each week: **0 → ≥N**
-2. Minutes to finish the core job (typical): **Xm → ≤Ym**
-3. Votes for “use this, not the sheet”: **0 → ≥N**
+**Mini-Vision:** Your team runs the weekly job here — the spreadsheet gathers dust.  
+**How we know:**
+1. At least N teammates use the core flow every week.
+2. A typical run of the core job takes ≤ Y minutes (down from X).
+3. At least N teammates say “use this, not the sheet.”
 
 **Goal 2 — Partners in week one (next)**  
-**Mini-Vision:** Outside teams get clear value without a helper on the call.  
-**KRs:**
-1. Partner spaces that finish setup alone: **0 → 3**
-2. Partners that finish the core job in ≤7 days: **0 → 3**
-3. Written “would continue / would pay”: **0 → 3**
+**Mini-Vision:** Outside teams get clear value without someone holding their hand on a call.  
+**How we know:**
+1. Three partner spaces finish setup alone.
+2. Three partners finish the core job within seven days.
+3. Three written “would continue / would pay.”
 
 ## AI feature
 
 **Goal 1 — Prefer the assistant (active)**  
-**Mini-Vision:** People pick the AI path because it is faster and they trust it.  
-**KRs:**
-1. Sessions where AI finishes the job without redo: **X% → Y%**
-2. Slow cases (p95) on the happy path: **As → ≤Bs**
-3. Dogfood score “prefer AI vs manual”: **→ ≥8/10**
+**Mini-Vision:** People choose the AI path because it is faster and they trust it.  
+**How we know:**
+1. More sessions finish with AI without a manual redo (X% → Y%).
+2. The slow cases on the happy path get faster (A seconds → ≤ B).
+3. Dogfood score “prefer AI vs typing it myself” ≥ 8/10.
 
-**Goal 2 — Safe to scale (next)**  
-**Mini-Vision:** The feature can run for many people without support melting down.  
-**KRs:**
-1. Eval gate failures: **N → 0**
-2. Support tickets per 1k AI sessions: **X → ≤Y**
-3. Policy problems in an audit sample: **N → 0**
+**Goal 2 — Safe for many (next)**  
+**Mini-Vision:** Lots of people can use it without support drowning.  
+**How we know:**
+1. Quality gate failures: N → 0.
+2. Support tickets per 1 000 AI sessions: X → ≤ Y.
+3. Policy problems in an audit sample: N → 0.
 
-## Task → plain outcome
+## Cold / insider → warm / outsider
 
-| Task-shaped (bad) | Plain countable KR (good) |
-|-------------------|---------------------------|
-| Ship Spec 15 / enable Anonymous Auth | Email-code asks before first receipt: **1+ → 0** |
-| Build APK | People who open after install (not Expo Go): **0 → 5** |
-| Implement realtime | Two people see each other’s receipt in 5 min: **0 → ≥1** |
-| Add polish | Share of your receipts kept in-app on a real trip: **→ 100%** |
-| Ask 5 people if they like it | “Again next trip” ≥4/5: **0 → ≥4** of 5 |
+| Insider (rewrite) | Outsider (good) |
+|-------------------|-----------------|
+| OTP before first Bon ≥1 → 0 | First expense without signup or email code |
+| Opens without Expo Go: 0 → 5 | Five people install like a normal app and open it |
+| Spec 15 done | *(not a Key Result — put in build steps)* |
+| 8+ Bons + score ≥8/10 jammed in one line | Two clear sentences: really used it eight times; then “would I invite them?” ≥8/10 |
