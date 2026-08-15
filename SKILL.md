@@ -2,10 +2,11 @@
 name: goal-driven-specs
 description: >-
   Bootstrap and run goal-driven, spec-driven product work for AI-built apps:
-  child-simple mini-vision Objectives, 3 countable Key Results, numbered Specs,
-  STATUS, and HTML board/viewer. Use when starting docs/specs, choosing what to
-  build next, writing Specs from briefs, checking feasibility before code,
-  updating progress after ship, or teaching an agent to stay Goal-scoped.
+  outsider-inspiring mini-vision Objectives, 3 clear countable Key Results,
+  numbered Specs, STATUS, and HTML board/viewer. Use when starting docs/specs,
+  choosing what to build next, writing Specs from briefs, checking feasibility
+  before code, updating progress after ship, or teaching an agent to stay
+  Goal-scoped.
 ---
 
 # Goal-driven Specs (for AI-built apps)
@@ -181,7 +182,7 @@ If KRs are task-shaped, jargon-heavy, or Objectives are metric-heavy → rewrite
 
 - “What next?” → unfinished KR under **active** Goal → next Spec for that KR.
 - Do not implement Goal 2 while Goal 1 KR3 is open unless overridden.
-- Creating/changing Goals → Mini-Vision + 3 countable KRs in plain language; rewrite task-KRs.
+- Creating/changing Goals → Mini-Vision + 3 KRs that pass the **outsider test**; rewrite jargon/task-KRs.
 - Tick KR only after measuring (Spec done ≠ KR done).
 - Prefer project language for Specs/Goals; remind about build steps that unlock a count (flags, SQL).
 - Never leave `partial` without a simple-language gap.
