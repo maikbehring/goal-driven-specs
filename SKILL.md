@@ -54,9 +54,10 @@ Then with the user:
 1. **Product name** + language for docs (match the product; English templates are defaults — rewrite Goals in the product language).
 2. **Goal 1 Mini-Vision** + **exactly 3 Key Results** (countable outcomes in plain words).
 3. **Goal 2** (recommended): Mini-Vision + 3 KRs — document early, implement later.
-4. First Specs mapped to KRs as **build steps** (not as the KR text).
-5. Paste [templates/AGENTS.md](templates/AGENTS.md) into `AGENTS.md` / `CLAUDE.md`.
-6. `npm run specs:html` → open `docs/specs/status.html`.
+4. **Goal 3** (optional draft): Mini-Vision + 3 KRs as **potential** — do not build yet.
+5. First Specs mapped to KRs as **build steps** (not as the KR text).
+6. Paste [templates/AGENTS.md](templates/AGENTS.md) into `AGENTS.md` / `CLAUDE.md`.
+7. `npm run specs:html` → open `docs/specs/status.html`.
 
 Minimal set: `GOALS.md` + one Spec + `STATUS.md` + `status.html`.
 
@@ -136,8 +137,8 @@ Specs / flags / SQL = **build steps**. If the count doesn’t move, change the s
 | Tick only after measuring | Tick because code merged |
 | Stretch but believable | Guaranteed checkbox after one PR |
 
-**Goal 1 KR3** = real use / “I’d bring someone” — not “we decided”.  
-**Goal 2** = arrive · share clearly · “again please”.
+**Goal 2** = arrive · share clearly · “again please”.  
+**Goal 3** (optional draft) = strangers find it · strangers use it · it sustains (e.g. payers) — document early, build only after Goal 2.
 
 See [examples.md](examples.md).
 

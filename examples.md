@@ -13,12 +13,12 @@ Copy the **feel**. A stranger should understand and want it.
 3. **You’d invite.** Self-score ≥8/10 on “Would I invite my partner now?”  
    *(Tip: score after you’ve really used the app on a trip.)*
 
-**Goal 2 — Together on the road (next)**  
-**Mini-Vision:** Friends share a trip wallet on their phones that they’re happy to use on the next trip.  
+**Consumer Goal 3 — Far enough for strangers (potential)**  
+**Mini-Vision:** People who don’t know you find the trip wallet and keep it for the next trip.  
 **How we know:**
-1. **Five people arrive.** Five people open the app after a normal install (not a special developer tool).
-2. **Their expense shows up fast.** At least one shared trip where the other person’s expense is visible within five minutes.
-3. **Next trip again.** At least four of five people asked want to use it on the next trip (score ≥4 of 5).
+1. **Strangers find the way.** At least 50 installs from a public phone store.
+2. **Strangers travel with it.** At least 10 shared trips outside your close circle.
+3. **It carries itself.** At least 10 people pay for the app (purchase or subscription).
 
 ## B2B SaaS
 
