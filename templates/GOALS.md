@@ -2,13 +2,14 @@
 
 For people who don’t know the product yet:
 
-- **Mini-Vision** = an inspiring picture of the future (no jargon, no numbers)
-- **How we know** = **exactly one** win per Key Result (no “and/or” joining two outcomes)
+- **Mini-Vision** = a closed, inspiring future picture (no jargon, no numbers)
+- **How we know** = **3–4** Key Results: each **one** outcome (metric + target); prefer 3, never more than 4
 - **Build steps** below = team work — *not* the goals themselves
+- **≥70% of a KR target** = good for the period; tick only after measuring
 
-Exactly **three** Key Results per Goal.  
-**Outsider test:** a stranger should understand and feel inspired.  
-**One-result test:** if a KR needs “and” between two wins, split or drop one.
+No “and/or” joining two wins in one KR.  
+No milestone chains. Peer-review: skill `okr-checklist.md`.  
+**Outsider test:** a stranger should understand and feel inspired.
 
 ---
 
@@ -22,14 +23,15 @@ Exactly **three** Key Results per Goal.
 1. [ ] **{{GOAL1_KR1}}**
 2. [ ] **{{GOAL1_KR2}}**
 3. [ ] **{{GOAL1_KR3}}**
+4. [ ] **{{GOAL1_KR4}}** <!-- optional 4th success driver; delete if unused -->
 
-Write each KR as a short human win (1–2 sentences), ending with something countable.
+Write each KR as a short human win, ending with metric + expected value.
 
 ### Reminders
 
 1. Experience first — then accounts / signup, if needed.
 2. One Spec at a time under this Goal.
-3. Don’t start Goal 2 build work until Goal 1 KR3 moves — unless overridden.
+3. Don’t start Goal 2 build work until Goal 1 KRs are ≥70% (or overridden).
 
 ### Build steps (for the team)
 

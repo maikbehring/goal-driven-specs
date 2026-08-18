@@ -42,7 +42,7 @@ Do not open insecure shortcuts to force FEASIBLE. Prefer phased delivery.
 
 | Phase | Scope | Schema / infra? |
 |-------|-------|-----------------|
-| 0 | … | No |
+| 0 | Docs / conversation aid (markdown; static HTML only if asked) | No |
 | 1 | … | … |
 
 ## Acceptance Criteria
