@@ -6,8 +6,8 @@
 - [ ] `docs/specs/GOALS.md` — order table + KR ticks if outcome met
 - [ ] `docs/specs/STATUS.md` — Spec row + KR table
 - [ ] `docs/specs/README.md` — status column + **next Spec**
-- [ ] `docs/specs/status.html` — specs[] entry, Goal steps, `kr-done` classes
-- [ ] `AGENTS.md` / `CLAUDE.md` — Goal order if it changed
+- [ ] `docs/specs/status.html` — **hand-edit** `specs[]`, Goal steps, Kanban, `kr-done`, “as of” date (`npm run specs:html` does **not** write this file)
+- [ ] `AGENTS.md` / `CLAUDE.md` — Goal **order table** if sequence changed (Spec numbers stay)
 - [ ] `npm run specs:html`
 
 ## Renumber / free a Spec number
@@ -24,6 +24,28 @@
 3. Swap `goal1` / `goal2` in `status.html` JS + Goal step lists; renumber sibling slots.
 4. Re-evaluate KR checkboxes (a move can complete or reopen a KR).
 5. `npm run specs:html`.
+
+## Spec number vs build order
+
+The filename `13-tarif.md` is a **permanent ID**. Goal 1 step **#11** may point at Spec 13. Never reuse a number to “fill a gap”.
+
+`GOALS.md` / `AGENTS.md` **Order:** `01 → 02 → … → 13` is the sequence to *work*, not “Spec 13 is the 13th file you write.”
+
+## Inserting a Spec into an existing chain
+
+1. New Spec owns **only the delta** (one new rung, one new page, one new default).
+2. Update `depends_on` and the nested tables on Specs that already owned the surface.
+3. Do not rewrite the owning Spec from scratch in parallel.
+4. Wire GOALS order, STATUS, README, `status.html`, `AGENTS.md`.
+5. `npm run specs:html` **plus** hand-edit the board.
+
+## Goal 2 markdown vs Goal 2 product
+
+Conversation aids and Goal 2 Spec markdown may exist while Goal 1 is open. Goal 2 **apps** wait. Shipping the aid does not tick Goal-2 KRs (those need measured calls / keys / …).
+
+## Publishing a static conversation page
+
+See SKILL.md. Checklist: existing host, noindex, no cookies/trackers/webfonts, legal footer, leak grep, Spec updated first.
 
 ## Overlapping Specs
 

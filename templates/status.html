@@ -43,7 +43,10 @@
       max-width: 920px;
       margin: 0 auto;
       padding: 40px 20px 72px;
+      transition: max-width 0.2s ease;
     }
+
+    .wrap.wide { max-width: 1280px; }
 
     header {
       margin-bottom: 28px;
@@ -139,11 +142,46 @@
     .progress .offen,
     .progress .open { background: rgba(138, 160, 166, 0.45); }
 
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
     .filters {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 16px;
+    }
+
+    .views {
+      display: flex;
+      gap: 6px;
+      padding: 4px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+    }
+
+    .views button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 999px;
+      cursor: pointer;
+    }
+
+    .views button[aria-pressed="true"] {
+      background: var(--brand);
+      color: #fff;
     }
 
     .filters button {
@@ -528,6 +566,79 @@
     }
 
     section.goal.next .goal-eyebrow { color: var(--brand); }
+
+    .board {
+      display: none;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-items: start;
+    }
+
+    .wrap.wide .board { display: grid; }
+    .wrap.wide .list { display: none; }
+
+    .col {
+      background: rgba(255, 255, 255, 0.45);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 12px;
+      min-height: 8rem;
+    }
+
+    .col-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 2px 6px 12px;
+    }
+
+    .col-head h2 {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .col-count {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .col.open { border-top: 4px solid rgba(138, 160, 166, 0.7); }
+    .col.partial { border-top: 4px solid var(--warning); }
+    .col.done { border-top: 4px solid var(--success); }
+
+    .col-cards { display: flex; flex-direction: column; gap: 10px; }
+
+    .k-card {
+      display: block;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 14px 14px 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .k-card:hover { box-shadow: 0 14px 32px rgba(22, 52, 58, 0.1); }
+    .k-card[hidden] { display: none !important; }
+    .k-card.goal1 { border-left: 4px solid var(--accent); }
+    .k-card.goal2 { border-left: 4px solid var(--brand); }
+    .k-card .kurz { grid-column: auto; display: block; margin: 0; font-size: 0.84rem; color: var(--muted); }
+    .k-card .title { display: block; margin: 0 0 6px; }
+    .k-card .fehlt-line { display: block; margin: 10px 0 0; font-size: 0.8rem; grid-column: auto; }
+    .k-card[data-status="done"] .fehlt-line { display: none; }
+    .k-top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+
+    @media (max-width: 900px) {
+      .board { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -597,16 +708,37 @@
     <div class="stats" id="stats"></div>
     <div class="progress" id="progress" aria-hidden="true"></div>
 
-    <div class="filters" role="group" aria-label="Filter by status">
-      <button type="button" data-filter="all" aria-pressed="true">All</button>
-      <button type="button" data-filter="goal1" aria-pressed="false">Goal 1</button>
-      <button type="button" data-filter="goal2" aria-pressed="false">Goal 2</button>
-      <button type="button" data-filter="done" aria-pressed="false">Done</button>
-      <button type="button" data-filter="partial" aria-pressed="false">Partial</button>
-      <button type="button" data-filter="open" aria-pressed="false">Open</button>
+    <div class="toolbar">
+      <div class="filters" role="group" aria-label="Filter by status">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="goal1" aria-pressed="false">Goal 1</button>
+        <button type="button" data-filter="goal2" aria-pressed="false">Goal 2</button>
+        <button type="button" data-filter="done" aria-pressed="false">Done</button>
+        <button type="button" data-filter="partial" aria-pressed="false">Partial</button>
+        <button type="button" data-filter="open" aria-pressed="false">Open</button>
+      </div>
+      <div class="views" role="group" aria-label="View">
+        <button type="button" data-view="list" aria-pressed="true">List</button>
+        <button type="button" data-view="kanban" aria-pressed="false">Kanban</button>
+      </div>
     </div>
 
     <div class="list" id="list"></div>
+
+    <div class="board" id="board" hidden>
+      <section class="col open" data-col="open">
+        <div class="col-head"><h2>Open</h2><span class="col-count" data-count="open">0</span></div>
+        <div class="col-cards" id="col-open"></div>
+      </section>
+      <section class="col partial" data-col="partial">
+        <div class="col-head"><h2>Partial</h2><span class="col-count" data-count="partial">0</span></div>
+        <div class="col-cards" id="col-partial"></div>
+      </section>
+      <section class="col done" data-col="done">
+        <div class="col-head"><h2>Done</h2><span class="col-count" data-count="done">0</span></div>
+        <div class="col-cards" id="col-done"></div>
+      </section>
+    </div>
 
     <section class="core">
       <h2>Product core</h2>
@@ -618,7 +750,8 @@
       <a href="./view.html?spec=GOALS.md">Goals</a> ·
       <a href="./view.html?spec=README.md">README</a> ·
       <a href="./view.html?spec=STATUS.md">STATUS</a> ·
-      <a href="./status.html">Status board</a>
+      <a href="./status.html">Status board</a> ·
+      <a href="./status.html#kanban">Kanban</a>
       · Refresh: <code>npm run specs:html</code>
     </footer>
   </div>
@@ -673,17 +806,22 @@
       <span class="open" style="width:${pct(counts.open)}%"></span>
     `;
 
+    const cardMeta = (s) => {
+      const st = normStatus(s.status);
+      const goalClass = s.goal1 ? " goal1" : s.goal2 ? " goal2" : "";
+      const goalBadge = s.goal1
+        ? `<span class="badge goal1">Goal 1 · #${s.goal1}</span>`
+        : s.goal2
+          ? `<span class="badge goal2">Goal 2 · #${s.goal2}</span>`
+          : "";
+      return { st, goalClass, goalBadge };
+    };
+
     const list = document.getElementById("list");
     list.innerHTML = specs
       .map((s) => {
         const bullets = (arr) => arr.map((x) => `<li>${x}</li>`).join("");
-        const goalClass = s.goal1 ? " goal1" : s.goal2 ? " goal2" : "";
-        const goalBadge = s.goal1
-          ? `<span class="badge goal1">Goal 1 · #${s.goal1}</span>`
-          : s.goal2
-            ? `<span class="badge goal2">Goal 2 · #${s.goal2}</span>`
-            : "";
-        const st = normStatus(s.status);
+        const { st, goalClass, goalBadge } = cardMeta(s);
         return `
           <details class="spec${goalClass}" data-status="${st}" data-goal1="${s.goal1 ? "1" : "0"}" data-goal2="${s.goal2 ? "1" : "0"}">
             <summary>
@@ -713,21 +851,80 @@
       })
       .join("");
 
+    const cols = {
+      open: document.getElementById("col-open"),
+      partial: document.getElementById("col-partial"),
+      done: document.getElementById("col-done"),
+    };
+    specs.forEach((s) => {
+      const { st, goalClass, goalBadge } = cardMeta(s);
+      const el = document.createElement("a");
+      el.className = `k-card${goalClass}`;
+      el.href = `./view.html?spec=${encodeURIComponent(s.file)}`;
+      el.dataset.status = st;
+      el.dataset.goal1 = s.goal1 ? "1" : "0";
+      el.dataset.goal2 = s.goal2 ? "1" : "0";
+      el.innerHTML = `
+        <div class="k-top">
+          <span class="id">${s.id}</span>
+          <span class="badges">${goalBadge}<span class="badge prio">${s.prio}</span></span>
+        </div>
+        <span class="title">${s.title}</span>
+        <span class="kurz">${s.kurz}</span>
+        <span class="fehlt-line"><strong>Missing:</strong> ${s.fehltEinfach}</span>
+      `;
+      (cols[st] || cols.open).appendChild(el);
+    });
+
+    const wrap = document.querySelector(".wrap");
+    const board = document.getElementById("board");
+    const viewBtns = document.querySelectorAll(".views button");
+
+    const setView = (view) => {
+      const kanban = view === "kanban";
+      wrap.classList.toggle("wide", kanban);
+      board.hidden = !kanban;
+      viewBtns.forEach((b) =>
+        b.setAttribute("aria-pressed", String(b.dataset.view === view))
+      );
+      if (kanban) history.replaceState(null, "", "#kanban");
+      else if (location.hash === "#kanban") history.replaceState(null, "", location.href.split("#")[0]);
+    };
+
+    const applyFilter = (filter) => {
+      const match = (el) => {
+        if (filter === "goal1") return el.dataset.goal1 === "1";
+        if (filter === "goal2") return el.dataset.goal2 === "1";
+        if (filter !== "all") return el.dataset.status === filter;
+        return true;
+      };
+      document.querySelectorAll(".spec, .k-card").forEach((el) => {
+        el.hidden = !match(el);
+      });
+      ["open", "partial", "done"].forEach((st) => {
+        const n = [...document.querySelectorAll(`.k-card[data-status="${st}"]`)].filter(
+          (el) => !el.hidden
+        ).length;
+        const countEl = document.querySelector(`[data-count="${st}"]`);
+        if (countEl) countEl.textContent = n;
+      });
+    };
+
     document.querySelectorAll(".filters button").forEach((btn) => {
       btn.addEventListener("click", () => {
-        const filter = btn.dataset.filter;
         document
           .querySelectorAll(".filters button")
           .forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
-        document.querySelectorAll(".spec").forEach((el) => {
-          let show = true;
-          if (filter === "goal1") show = el.dataset.goal1 === "1";
-          else if (filter === "goal2") show = el.dataset.goal2 === "1";
-          else if (filter !== "all") show = el.dataset.status === filter;
-          el.hidden = !show;
-        });
+        applyFilter(btn.dataset.filter);
       });
     });
+
+    viewBtns.forEach((btn) => {
+      btn.addEventListener("click", () => setView(btn.dataset.view));
+    });
+
+    setView(location.hash === "#kanban" ? "kanban" : "list");
+    applyFilter("all");
   </script>
 </body>
 </html>
